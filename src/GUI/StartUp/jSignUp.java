@@ -168,7 +168,7 @@ public class jSignUp extends javax.swing.JPanel {
     
     private JStartUp _JStartUp;
     private IUserServices _UserServices;
-    
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bLogin;
     private javax.swing.JButton bSignUp;
