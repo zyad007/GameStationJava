@@ -7,6 +7,10 @@ import java.util.Random;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 
 public class jSnakeLadder extends javax.swing.JPanel{
@@ -23,7 +27,6 @@ public class jSnakeLadder extends javax.swing.JPanel{
     private void move(int step) {
         client.MOVE(step);
     }
-    
     
     //UI Changes Functions
     public void showDialog(String message) {
@@ -68,7 +71,7 @@ public class jSnakeLadder extends javax.swing.JPanel{
         bSend = new javax.swing.JButton();
         gamePanel = new javax.swing.JPanel();
         jMessage = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        Board = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(800, 550));
 
@@ -79,7 +82,7 @@ public class jSnakeLadder extends javax.swing.JPanel{
             }
         });
 
-        UserPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        UserPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         UserNameLabel.setText("User name");
 
@@ -111,7 +114,7 @@ public class jSnakeLadder extends javax.swing.JPanel{
         GameName.setText("Snake & Ladder");
         GameName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        dicePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        dicePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         bRollDice.setText("Roll Dice");
         bRollDice.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,13 +177,16 @@ public class jSnakeLadder extends javax.swing.JPanel{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        chatPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        chatPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         enterMsg.setText("enter text here");
 
-        chatArea.setColumns(20);
+        chatArea.setEditable(false);
+        chatArea.setColumns(18);
         chatArea.setRows(5);
         chatArea.setText("Chat ");
+        chatArea.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        chatArea.setFocusable(false);
         jScrollPane1.setViewportView(chatArea);
 
         bSend.setText("Send");
@@ -192,12 +198,12 @@ public class jSnakeLadder extends javax.swing.JPanel{
             .addGroup(chatPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(chatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(chatPanelLayout.createSequentialGroup()
                         .addComponent(enterMsg)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bSend, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addComponent(jScrollPane1)))
+                        .addComponent(bSend)))
+                .addContainerGap())
         );
         chatPanelLayout.setVerticalGroup(
             chatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,11 +217,14 @@ public class jSnakeLadder extends javax.swing.JPanel{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        gamePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jMessage.setBackground(new java.awt.Color(204, 204, 204));
         jMessage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMessage.setText("message");
         jMessage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Snake & Ladder.jpg"))); // NOI18N
+        Board.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Snake & Ladder.jpg"))); // NOI18N
 
         javax.swing.GroupLayout gamePanelLayout = new javax.swing.GroupLayout(gamePanel);
         gamePanel.setLayout(gamePanelLayout);
@@ -224,8 +233,8 @@ public class jSnakeLadder extends javax.swing.JPanel{
             .addGroup(gamePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Board))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         gamePanelLayout.setVerticalGroup(
@@ -233,8 +242,8 @@ public class jSnakeLadder extends javax.swing.JPanel{
             .addGroup(gamePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(Board)
                 .addContainerGap())
         );
 
@@ -261,17 +270,19 @@ public class jSnakeLadder extends javax.swing.JPanel{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bBack)
-                    .addComponent(GameName))
-                .addGap(18, 18, 18)
-                .addComponent(UserPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dicePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
-            .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bBack)
+                            .addComponent(GameName))
+                        .addGap(18, 18, 18)
+                        .addComponent(UserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dicePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         chatPanel.getAccessibleContext().setAccessibleName("");
@@ -297,12 +308,16 @@ public class jSnakeLadder extends javax.swing.JPanel{
 //        diceOnePanel.add(diceOneImg);
 //        diceTwoPanel.add(diceTwoImg);
 //        diceOnePanel.repaint();
+           JLabel imgLabel = new JLabel(new ImageIcon("C:\\Users\\Zyad\\Desktop\\Java Projcet\\GameStation\\src\\GUI\\Games\\dice\\dice1.png"));
+           diceOnePanel.add(imgLabel);
+           diceOnePanel.repaint();
     }//GEN-LAST:event_bRollDiceMouseClicked
-                                       
+          
     //Parent
     private JHome _JHome;
     private SnakeLadderClient client;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Board;
     private javax.swing.JLabel GameName;
     private javax.swing.JLabel UserAvatarIcon;
     private javax.swing.JLabel UserNameLabel;
@@ -317,7 +332,6 @@ public class jSnakeLadder extends javax.swing.JPanel{
     private javax.swing.JPanel diceTwoPanel;
     private javax.swing.JTextField enterMsg;
     private javax.swing.JPanel gamePanel;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jMessage;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
