@@ -64,10 +64,15 @@ public class JStartUp extends javax.swing.JFrame {
             }
         });
 
-        bSignUp.setText("SignUp");
+        bSignUp.setText("Sign Up");
         bSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bSignUpMouseClicked(evt);
+            }
+        });
+        bSignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSignUpActionPerformed(evt);
             }
         });
 
@@ -170,6 +175,10 @@ public class JStartUp extends javax.swing.JFrame {
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bLoginActionPerformed
+
+    private void bSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSignUpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bSignUpActionPerformed
     
     
     

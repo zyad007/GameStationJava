@@ -43,7 +43,7 @@ public class jSignUp extends javax.swing.JPanel {
         tPassword = new javax.swing.JPasswordField();
         tConfirmPassword = new javax.swing.JPasswordField();
 
-        bSignUp.setText("SignUp");
+        bSignUp.setText("Sign Up");
         bSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bSignUpMouseClicked(evt);
@@ -92,7 +92,7 @@ public class jSignUp extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(160, 160, 160)
                 .addComponent(bSignUp)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
