@@ -4,8 +4,10 @@
  */
 package GUI.StartUp;
 
+import Entities.User;
 import GUI.JHome;
 import IServices.IUserServices;
+import Services.UserServices;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +21,7 @@ public class jSignUp extends javax.swing.JPanel {
      */
     public jSignUp(JStartUp jsu) {
         initComponents();
-        
+        _UserServices = new UserServices();
         _JStartUp = jsu;
     }
 
@@ -119,9 +121,10 @@ public class jSignUp extends javax.swing.JPanel {
     private void bLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bLoginMouseClicked
         _JStartUp.home();
     }//GEN-LAST:event_bLoginMouseClicked
-
+    
     // Sign In -> Home
     private void bSignUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bSignUpMouseClicked
+
         String name=tUsername.getText().toString();
         String pass=tPassword.getText().toString();
         String coPass=tConfirmPassword.getText().toString();
@@ -140,6 +143,12 @@ public class jSignUp extends javax.swing.JPanel {
         if(!name.equals("")&&!pass.equals("")&&!coPass.equals("")&&pass.equals(coPass))
         {
         JOptionPane.showMessageDialog(null, "Account created successfully "+name);
+        
+        User user = new User();
+        user.username = name;
+        user.password = pass;
+        
+        _UserServices.signUp(user);
         
         //Add Sign Up
         if(true) {

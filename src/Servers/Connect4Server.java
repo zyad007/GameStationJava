@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+ 
 /**
  *
  * @author adham
@@ -60,7 +60,7 @@ class Game {
                       return symbol="player2_wins";
                   }
                }
-               
+                
            }
        }
          return symbol="draw";
