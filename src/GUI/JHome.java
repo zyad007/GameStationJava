@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Entities.User;
 import GUI.Games.jSnakeLadder;
 import GUI.StartUp.JStartUp;
 import java.awt.Dimension;
@@ -19,10 +20,19 @@ public class JHome extends javax.swing.JFrame {
     /**
      * Creates new form jHome
      */
+
     public JHome() {
         initComponents();
         DEFAULT_SIZE =  this.getSize();
     }
+    public void setLogedInUser(User user){
+        logedInUser=user;
+        
+        lUsername.setText(user.username);
+        lglobalScore.setText( ""+user.global_score);
+        licon.setText( ""+user.icon);
+    }
+   
     
     private void switchPanel(JPanel panel) {
         jDefault.removeAll();
@@ -53,6 +63,11 @@ public class JHome extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        licon = new javax.swing.JLabel();
+        lUsername = new javax.swing.JLabel();
+        lglobalScore = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         bSnakeLadder = new javax.swing.JButton();
         bXO = new javax.swing.JButton();
@@ -86,15 +101,50 @@ public class JHome extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        licon.setText("123");
+
+        lUsername.setText("jLabel4");
+
+        lglobalScore.setText("jLabel5");
+
+        jLabel4.setText("USERNAME");
+
+        jLabel5.setText("SCORE");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 213, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(licon, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                            .addComponent(lglobalScore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(licon, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lUsername)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lglobalScore)
+                    .addComponent(jLabel5))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -280,6 +330,7 @@ public class JHome extends javax.swing.JFrame {
     
     //Games GUI Panels
     private jSnakeLadder _jSnakeLadder;
+    private User logedInUser ;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel _Dashboard;
@@ -293,8 +344,13 @@ public class JHome extends javax.swing.JFrame {
     private javax.swing.JPanel jDefault;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lUsername;
+    private javax.swing.JLabel lglobalScore;
+    private javax.swing.JLabel licon;
     // End of variables declaration//GEN-END:variables
 }
