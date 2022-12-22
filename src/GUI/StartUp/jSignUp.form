@@ -42,7 +42,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
               <Component id="bSignUp" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="172" max="32767" attributes="0"/>
+              <EmptySpace pref="168" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,7 +76,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="bSignUp">
       <Properties>
-        <Property name="text" type="java.lang.String" value="SignUp"/>
+        <Property name="text" type="java.lang.String" value="Sign Up"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bSignUpMouseClicked"/>

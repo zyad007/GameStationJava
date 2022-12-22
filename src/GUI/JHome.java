@@ -181,7 +181,7 @@ public class JHome extends javax.swing.JFrame {
 
                     jDefault.add(_Dashboard, "card2");
 
-                    jButton1.setText("SIGNUP");
+                    jButton1.setText("Sign out");
                     jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
                         public void mouseClicked(java.awt.event.MouseEvent evt) {
                             jButton1MouseClicked(evt);
