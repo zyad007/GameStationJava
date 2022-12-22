@@ -29,7 +29,7 @@ public class Connect4Server {
         }
     }
     
-}
+} 
 class Game {
     // the game logic 
     
