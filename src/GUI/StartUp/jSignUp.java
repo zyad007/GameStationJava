@@ -5,8 +5,7 @@
 package GUI.StartUp;
 
 import GUI.JHome;
-import IServices.IAccountServices;
-import Services.AccountServices;
+import IServices.IUserServices;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +20,6 @@ public class jSignUp extends javax.swing.JPanel {
     public jSignUp(JStartUp jsu) {
         initComponents();
         
-        _AccountService = new AccountServices();
         _JStartUp = jsu;
     }
 
@@ -143,8 +141,8 @@ public class jSignUp extends javax.swing.JPanel {
         {
         JOptionPane.showMessageDialog(null, "Account created successfully "+name);
         
-        boolean result = _AccountService.signUp("", "");
-        if(result) {
+        //Add Sign Up
+        if(true) {
             _JStartUp.dispose();
             JHome _JHome=new JHome();
             _JHome.setLocationRelativeTo(null);
@@ -160,8 +158,7 @@ public class jSignUp extends javax.swing.JPanel {
     
     
     private JStartUp _JStartUp;
-    
-    private IAccountServices _AccountService;
+    private IUserServices _UserServices;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bLogin;
