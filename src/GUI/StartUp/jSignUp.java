@@ -7,6 +7,7 @@ package GUI.StartUp;
 import GUI.JHome;
 import IServices.IAccountServices;
 import Services.AccountServices;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,11 +37,21 @@ public class jSignUp extends javax.swing.JPanel {
         bSignUp = new javax.swing.JButton();
         bLogin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        tUsername = new javax.swing.JTextField();
+        tPassword = new javax.swing.JPasswordField();
+        tConfirmPassword = new javax.swing.JPasswordField();
 
         bSignUp.setText("SignUp");
         bSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bSignUpMouseClicked(evt);
+            }
+        });
+        bSignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSignUpActionPerformed(evt);
             }
         });
 
@@ -51,31 +62,58 @@ public class jSignUp extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("SignUp");
+        jLabel1.setText("USERNAME");
+
+        jLabel4.setText("PASSWORD");
+
+        jLabel5.setText("CONFIRM PASSWPRD");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(154, 154, 154)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(bLogin)
-                        .addComponent(bSignUp)))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tConfirmPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(tPassword)
+                            .addComponent(tUsername)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(bLogin)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(bSignUp)
+                .addContainerGap(172, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(bLogin)
+                .addGap(64, 64, 64)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(tUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(tConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addComponent(bSignUp)
-                .addGap(89, 89, 89))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(bLogin)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -86,12 +124,39 @@ public class jSignUp extends javax.swing.JPanel {
 
     // Sign In -> Home
     private void bSignUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bSignUpMouseClicked
+        String name=tUsername.getText().toString();
+        String pass=tPassword.getText().toString();
+        String coPass=tConfirmPassword.getText().toString();
+        if(name.equals("")){
+            JOptionPane.showMessageDialog(null, "PLS ENTER USERNAME");
+        }
+        else if(pass.equals("")){
+            JOptionPane.showMessageDialog(null, "PLS ENTER PASSWORD");
+        }
+        else if(coPass.equals("")){
+            JOptionPane.showMessageDialog(null, "PLS ENTER CONFIRM PASSWORD");
+        }
+        else if(!pass.equals(coPass)){
+            JOptionPane.showMessageDialog(null, " password and confirm password doesn't match");
+        }
+        if(!name.equals("")&&!pass.equals("")&&!coPass.equals("")&&pass.equals(coPass))
+        {
+        JOptionPane.showMessageDialog(null, "Account created successfully "+name);
+        
         boolean result = _AccountService.signUp("", "");
         if(result) {
             _JStartUp.dispose();
-            new JHome().setVisible(true);
+            JHome _JHome=new JHome();
+            _JHome.setLocationRelativeTo(null);
+            _JHome.setResizable(false);
+            _JHome.setVisible(true);
+        }
         }
     }//GEN-LAST:event_bSignUpMouseClicked
+
+    private void bSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSignUpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bSignUpActionPerformed
     
     
     private JStartUp _JStartUp;
@@ -102,5 +167,10 @@ public class jSignUp extends javax.swing.JPanel {
     private javax.swing.JButton bLogin;
     private javax.swing.JButton bSignUp;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPasswordField tConfirmPassword;
+    private javax.swing.JPasswordField tPassword;
+    private javax.swing.JTextField tUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package GUI.StartUp;
 import GUI.JHome;
 import IServices.IAccountServices;
 import Services.AccountServices;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -43,6 +44,9 @@ public class JStartUp extends javax.swing.JFrame {
         bLogin = new javax.swing.JButton();
         bSignUp = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tUsername = new javax.swing.JTextField();
+        tPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,6 +58,11 @@ public class JStartUp extends javax.swing.JFrame {
                 bLoginMouseClicked(evt);
             }
         });
+        bLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bLoginActionPerformed(evt);
+            }
+        });
 
         bSignUp.setText("SignUp");
         bSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -62,30 +71,49 @@ public class JStartUp extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("login");
+        jLabel1.setText("USERNAME");
+
+        jLabel2.setText("PASSWORD");
 
         javax.swing.GroupLayout jLoginLayout = new javax.swing.GroupLayout(jLogin);
         jLogin.setLayout(jLoginLayout);
         jLoginLayout.setHorizontalGroup(
             jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLoginLayout.createSequentialGroup()
-                .addGap(153, 153, 153)
-                .addGroup(jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(bSignUp)
-                    .addComponent(bLogin))
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(tUsername))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoginLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(bSignUp))
+            .addGroup(jLoginLayout.createSequentialGroup()
+                .addGap(162, 162, 162)
+                .addComponent(bLogin)
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         jLoginLayout.setVerticalGroup(
             jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoginLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGap(80, 80, 80)
+                .addGroup(jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tUsername)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jLoginLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(3, 3, 3)))
+                .addGap(26, 26, 26)
                 .addComponent(bLogin)
-                .addGap(37, 37, 37)
-                .addComponent(bSignUp)
-                .addGap(50, 50, 50))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addComponent(bSignUp))
         );
 
         jDefault.add(jLogin, "card2");
@@ -112,17 +140,36 @@ public class JStartUp extends javax.swing.JFrame {
 
     // Log In -> Home
     private void bLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bLoginMouseClicked
+        String name=tUsername.getText().toString();
+        String pass=tPassword.getText().toString();
+        if(name.equals("")){
+            JOptionPane.showMessageDialog(null, "PLS ENTER USERNAME");
+        }
+        else if(pass.equals("")){
+            JOptionPane.showMessageDialog(null, "PLS ENTER PASSWORD");
+        }
+        if(!name.equals("")&&!pass.equals(""))
+        {
         boolean result = _AccountServices.login("", "");
         if(result) {
             this.dispose();
-            new JHome().setVisible(true);
+            JHome _JHome=new JHome();
+            _JHome.setLocationRelativeTo(null);
+            _JHome.setResizable(false);
+            _JHome.setVisible(true);
+        }
         }
     }//GEN-LAST:event_bLoginMouseClicked
 
     // -> Sign Up
     private void bSignUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bSignUpMouseClicked
+        
         switchPanels(_jSignUp);
     }//GEN-LAST:event_bSignUpMouseClicked
+
+    private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bLoginActionPerformed
     
     
     
@@ -156,7 +203,12 @@ public class JStartUp extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JStartUp().setVisible(true);
+                
+               JStartUp _StartUp =  new JStartUp();
+               _StartUp.setLocationRelativeTo(null);
+               _StartUp.setResizable(false);
+               _StartUp.setVisible(true);
+              
             }
         });
     }
@@ -171,6 +223,9 @@ public class JStartUp extends javax.swing.JFrame {
     private javax.swing.JButton bSignUp;
     private javax.swing.JPanel jDefault;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jLogin;
+    private javax.swing.JPasswordField tPassword;
+    private javax.swing.JTextField tUsername;
     // End of variables declaration//GEN-END:variables
 }
