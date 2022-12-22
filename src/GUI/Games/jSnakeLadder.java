@@ -22,7 +22,7 @@ public class jSnakeLadder extends javax.swing.JPanel{
         
         client = new SnakeLadderClient(this);
     }
-    
+     
     //Move Client
     private void move(int step) {
         client.MOVE(step);

@@ -4,9 +4,10 @@
  */
 package GUI.StartUp;
 
+import Entities.User;
 import GUI.JHome;
-import IServices.IAccountServices;
-import Services.AccountServices;
+import IServices.IUserServices;
+import Services.UserServices;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -20,8 +21,7 @@ public class JStartUp extends javax.swing.JFrame {
     public JStartUp() {
         initComponents();
         _jSignUp = new jSignUp(this);
-        
-        _AccountServices = new AccountServices();
+        _UserServices = new UserServices();
     }
     
     private void switchPanels(JPanel panel) {
@@ -145,8 +145,8 @@ public class JStartUp extends javax.swing.JFrame {
 
     // Log In -> Home
     private void bLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bLoginMouseClicked
-        String name=tUsername.getText().toString();
-        String pass=tPassword.getText().toString();
+        String name= tUsername.getText().toString();
+        String pass= tPassword.getText().toString();
         if(name.equals("")){
             JOptionPane.showMessageDialog(null, "PLS ENTER USERNAME");
         }
@@ -155,8 +155,8 @@ public class JStartUp extends javax.swing.JFrame {
         }
         if(!name.equals("")&&!pass.equals(""))
         {
-        boolean result = _AccountServices.login("", "");
-        if(result) {
+        User result = new User(); //Todo Sign IN
+        if(result != null) {
             this.dispose();
             JHome _JHome=new JHome();
             _JHome.setLocationRelativeTo(null);
@@ -224,8 +224,7 @@ public class JStartUp extends javax.swing.JFrame {
 
     //JPanel
     private jSignUp _jSignUp;
-    
-    private IAccountServices _AccountServices;
+    private IUserServices _UserServices;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bLogin;

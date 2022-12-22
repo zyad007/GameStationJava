@@ -6,6 +6,7 @@
 package Services;
 
 import Entities.User;
+import IServices.IUserServices;
 import Services.connectionManger;
 
 import java.sql.Connection;
@@ -21,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author ahmed osama
  */
-public class UserServices {
+public class UserServices implements IUserServices {
 
     private Connection c;
 

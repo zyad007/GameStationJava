@@ -4,11 +4,16 @@
  */
 package IServices;
 
+import Entities.User;
+import java.util.UUID;
+
 /**
  *
  * @author Zyad
  */
-public interface IAccountServices {
-    boolean login(String userName, String password);
-    boolean signUp(String userName, String password);
+public interface IUserServices {
+    void signUp(User user);
+    User signIn(String username, String password);
+    User getById(UUID id);
+    boolean addScore(int score, UUID id);
 }
