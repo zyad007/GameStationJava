@@ -145,8 +145,13 @@ public class JStartUp extends javax.swing.JFrame {
 
     // Log In -> Home
     private void bLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bLoginMouseClicked
+
+        
         String name= tUsername.getText().toString();
         String pass= tPassword.getText().toString();
+        
+       
+        
         if(name.equals("")){
             JOptionPane.showMessageDialog(null, "PLS ENTER USERNAME");
         }
@@ -155,14 +160,19 @@ public class JStartUp extends javax.swing.JFrame {
         }
         if(!name.equals("")&&!pass.equals(""))
         {
-        User result = new User(); //Todo Sign IN
-        if(result != null) {
+            
+        User user = _UserServices.signIn(name, pass); //Todo Sign IN
+        
+        if(user != null) {
             this.dispose();
             JHome _JHome=new JHome();
             _JHome.setLocationRelativeTo(null);
             _JHome.setResizable(false);
             _JHome.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Wrong Username or Password");
         }
+                
         }
     }//GEN-LAST:event_bLoginMouseClicked
 
