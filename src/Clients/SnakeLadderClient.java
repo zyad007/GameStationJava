@@ -55,7 +55,7 @@ public class SnakeLadderClient {
     
     public void play() throws Exception {
         try {
-            String response = in.nextLine();
+            String response = in.nextLine(); //WLECOME  {id}
             char mark = response.charAt(8);
             char opponentMark = mark == '1' ? '2' : '1';
             System.out.println("Snake Stairs: Player " + mark);
