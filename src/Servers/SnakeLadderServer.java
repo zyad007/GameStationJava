@@ -43,11 +43,11 @@ class GameSnakeLadder {
 
     //3x3 = 36 steps
     private int locP1 = 1, locP2 = 1;
-    private int FINISH_LOCATION = 36;
-    private int[] snakeHeads = {11, 21, 35}; // Todo -> make a func that generates this randomly
-    private int[] snakeTails = {5, 13, 3};
-    private int[] ladderHeads = {15, 30, 24}; // Todo -> make a func that generates this randomly
-    private int[] ladderTails = {4, 2, 6};
+    private int FINISH_LOCATION = 100;
+    private int[] snakeHeads = {17, 62, 64 , 98 , 95 ,87 , 93 , 54}; // Todo -> make a func that generates this randomly
+    private int[] snakeTails = {7, 19, 60 , 79 , 75 , 36 , 73 ,34};
+    private int[] ladderHeads = {38, 42, 99 , 84 , 14 , 31,67 , 91}; // Todo -> make a func that generates this randomly
+    private int[] ladderTails = {1, 21 , 80 ,28 , 4 , 9 ,51,72};
 
     private int checkSnakeOrLadder(int location) {
         for (int i = 0; i < 3; i++) {
