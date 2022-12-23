@@ -58,8 +58,6 @@ public class Connect4Client {
                     coloums = Integer.parseInt(st.nextToken());
                     
                     
-                    _jConnect4.setTextMessage("You moved to: " + rows +" "+coloums);
-                   // _jConnect4.setPlayerLocation(rows , coloums); // MUST TAKE ROW AND COL In jConnect4
                     
                 } else if (response.startsWith("OPPONENT_MOVED")) {
                     
@@ -70,7 +68,6 @@ public class Connect4Client {
                     rows = Integer.parseInt(st2.nextToken());
                     coloums = Integer.parseInt(st2.nextToken());
                     _jConnect4.setTextMessage("Opponent moved to: "+rows+" "+coloums+", your turn");
-                  //  _jConnect4.setOponentLocation(rows , coloums); // MUST TAKE ROW ANC COL IN jConnect4
                     
                 } else if (response.startsWith("MESSAGE")) {
                     
