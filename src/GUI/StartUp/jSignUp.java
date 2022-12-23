@@ -142,7 +142,11 @@ public class jSignUp extends javax.swing.JPanel {
         }
         if(!name.equals("")&&!pass.equals("")&&!coPass.equals("")&&pass.equals(coPass))
         {
-        JOptionPane.showMessageDialog(null, "Account created successfully "+name);
+        
+        if(_UserServices.getByUsername(name) != null)  {
+            JOptionPane.showMessageDialog(null, "Username already in user");
+            return;
+        }
         
         User user = new User();
         user.username = name;
@@ -150,10 +154,13 @@ public class jSignUp extends javax.swing.JPanel {
         
         _UserServices.signUp(user);
         
+        JOptionPane.showMessageDialog(null, "Account created successfully "+name);
+        
         //Add Sign Up
         if(true) {
             _JStartUp.dispose();
             JHome _JHome=new JHome();
+            _JHome.setLogedInUser(user);
             _JHome.setLocationRelativeTo(null);
             _JHome.setResizable(false);
             _JHome.setVisible(true);

@@ -4,6 +4,7 @@
  */
 package Clients;
 
+import GUI.jChat;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
@@ -13,36 +14,47 @@ import java.util.Scanner;
  * @author Zyad
  */
 public class ChatClient {
-    public static void main(String[] args) {
+    
+    private Socket socket;
+    private Scanner in;
+    private PrintWriter out;
+    private jChat _jChat;
+    
+    public ChatClient(jChat js, String username) {
+        _jChat = js;
         try{
-        Socket socket = new Socket("localhost", 59001);
-        Scanner in = new Scanner(socket.getInputStream());
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        socket = new Socket("localhost", 59013);
+        in = new Scanner(socket.getInputStream());
+        out = new PrintWriter(socket.getOutputStream(), true);
+        }catch(Exception e) {
+            
+        }
         
-        Scanner scanner = new Scanner(System.in);
-        
-//        out.println("Zyad");
-//        System.out.println(in.nextLine());
+        out.println(username);
         
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    while(in.hasNextLine()) {
-                    System.out.println(in.nextLine());
-                }
+                    handle();
                 } catch (Exception ex) {
                     System.out.println("Play chatch");
                 }
             }
         }).start();
-        
-        while(scanner.hasNextLine()) {
-            String message = scanner.nextLine();
-            out.println(message);
+    }
+    
+    private void handle() {
+        while(in.hasNextLine()) {
+            String responce = in.nextLine().substring(7);
+            _jChat.pushMessage(responce.trim());
         }
-        
-        }catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
+    }
+    
+    public void MESSAGE(String message) {
+        out.println("MESSAGE "+ message);
+    }
+    
+    public void QUIT() {
+        out.println("QUIT");
     }
 }

@@ -87,12 +87,36 @@ public class UserServices implements IUserServices {
                 return user;
             } else {
                 return null;
-            }
+            } 
 
         } catch (SQLException ex) {
             return null;
         }
     }
+    
+    public User getByUsername(String username) {
+        String sql = "select * from user where username=?";
+
+        try {
+            PreparedStatement st = c.prepareStatement(sql);
+            st.setString(1,username);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                User user = new User();
+                user.id=UUID.fromString(rs.getString("id"));
+                user.username = rs.getString("username");
+                user.global_score = rs.getInt("global_score");
+                user.icon = rs.getInt("icon");
+                return user;
+            } else {
+                return null;
+            } 
+
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
     public boolean addScore(int score, UUID id)
     {
         try {

@@ -15,5 +15,6 @@ public interface IUserServices {
     void signUp(User user);
     User signIn(String username, String password);
     User getById(UUID id);
+    User getByUsername(String username);
     boolean addScore(int score, UUID id);
 }

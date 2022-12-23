@@ -24,7 +24,7 @@ public class Connect4Client {
     public Connect4Client(jSnakeLadder ssg) {
         _jConnect4 = ssg;
         try{
-        socket = new Socket("localhost", 58901);
+        socket = new Socket("localhost", 59071);
         in = new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
         }catch(Exception e) {

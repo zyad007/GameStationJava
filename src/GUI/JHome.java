@@ -330,7 +330,7 @@ public class JHome extends javax.swing.JFrame {
     
     //Games GUI Panels
     private jSnakeLadder _jSnakeLadder;
-    private User logedInUser ;
+    public User logedInUser ;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel _Dashboard;

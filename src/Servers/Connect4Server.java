@@ -22,7 +22,7 @@ public class Connect4Server {
             System.out.println("Connect Four Server is Running...");
             ExecutorService pool = Executors.newFixedThreadPool(200);
             while (true) {
-                Game game = new Game();
+                GameConnect4 game = new GameConnect4();
                 pool.execute(game.new Player(listener.accept(), '1'));
                 pool.execute(game.new Player(listener.accept(), '2'));
             }
@@ -30,12 +30,12 @@ public class Connect4Server {
     }
     
 } 
-class Game {
+class GameConnect4 {
     // the game logic 
     
     private String[][] board ;
     private int counter[]={6,6,6,6,6,6,6} ;
-    public Game()
+    public GameConnect4()
     {   // constructor
         board = new String[6][7];   
     }
