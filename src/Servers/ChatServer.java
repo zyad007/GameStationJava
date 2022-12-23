@@ -23,16 +23,10 @@ import java.util.concurrent.Executors;
  */
 public class ChatServer {
     
-    // All client names, so we can check for duplicates upon registration.
-    private static Set<String> names = new HashSet<>();
-
-    // The set of all the print writers for all the clients, used for broadcast.
-    private static Set<PrintWriter> writers = new HashSet<>();
-
     public static void main(String[] args) throws Exception {
         System.out.println("The chat server is running...");
         ExecutorService pool = Executors.newFixedThreadPool(500);
-        try (ServerSocket listener = new ServerSocket(59001)) {
+        try (ServerSocket listener = new ServerSocket(59013)) {
             while (true) {
                 Handler handler = new  Handler();
                 pool.execute(handler.new Client(listener.accept()));
@@ -73,7 +67,7 @@ public class ChatServer {
                     } else   {
                         client2 = this;
                         client2.out.println( "MESSAGE You joined!");
-//                        client1.out.println( "MESSAGE " +name+ ": has joined!");
+                        client1.out.println( "MESSAGE " +name+ ": has joined!");
                         System.out.println("User 2 Joined " + name);
                     }
                     while(in.hasNextLine()) {

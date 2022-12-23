@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Servers;
- 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -31,7 +31,7 @@ public class SnakeLadderServer {
             System.out.println("Snake Stairs Server is Running...");
             ExecutorService pool = Executors.newFixedThreadPool(200);
             while (true) {
-                Game game = new Game();
+                GameSnakeLadder game = new GameSnakeLadder();
                 pool.execute(game.new Player(listener.accept(), '1'));
                 pool.execute(game.new Player(listener.accept(), '2'));
             }
@@ -39,34 +39,38 @@ public class SnakeLadderServer {
     }
 }
 
-class Game {
+class GameSnakeLadder {
 
     //3x3 = 36 steps
     private int locP1 = 1, locP2 = 1;
     private int FINISH_LOCATION = 36;
-    private int[] snakeHeads = { 11 , 21, 35 }; // Todo -> make a func that generates this randomly
-    private int[] snakeTails = { 5 , 13, 3 };
-    private int[] ladderHeads = { 15 , 30, 24 }; // Todo -> make a func that generates this randomly
-    private int[] ladderTails = { 4 , 2, 6 };
-    
+    private int[] snakeHeads = {11, 21, 35}; // Todo -> make a func that generates this randomly
+    private int[] snakeTails = {5, 13, 3};
+    private int[] ladderHeads = {15, 30, 24}; // Todo -> make a func that generates this randomly
+    private int[] ladderTails = {4, 2, 6};
+
     private int checkSnakeOrLadder(int location) {
-        for(int i = 0; i < 3; i++) {
-            if(location == snakeHeads[i]) {
+        for (int i = 0; i < 3; i++) {
+            if (location == snakeHeads[i]) {
                 return snakeTails[i];
             }
-            
-            if(location == ladderTails[i]) {
+
+            if (location == ladderTails[i]) {
                 return ladderHeads[i];
             }
         }
         return location;
     }
-    
+
     Player currentPlayer;
 
     public boolean hasWinner() {
-        if(currentPlayer.id == '2' && locP1 >= FINISH_LOCATION) return true;
-        if(currentPlayer.id == '1' && locP2 >= FINISH_LOCATION) return true;
+        if (currentPlayer.id == '2' && locP1 >= FINISH_LOCATION) {
+            return true;
+        }
+        if (currentPlayer.id == '1' && locP2 >= FINISH_LOCATION) {
+            return true;
+        }
         return false;
     }
 
@@ -75,25 +79,26 @@ class Game {
             throw new IllegalStateException("Not your turn");
         } else if (player.opponent == null) {
             throw new IllegalStateException("You don't have an opponent yet");
-        } 
-        
-        if(player.id == '1') {
+        }
+
+        if (player.id == '1') {
             locP1 += step;
             locP1 = checkSnakeOrLadder(locP1);
-        }else {
+        } else {
             locP2 += step;
             locP2 = checkSnakeOrLadder(locP2);
         }
-        
+
         currentPlayer = currentPlayer.opponent;
     }
 
     /**
-     * A Player is identified by a character mark which is either 'X' or 'O'. For
-     * communication with the client the player has a socket and associated Scanner
-     * and PrintWriter.
+     * A Player is identified by a character mark which is either 'X' or 'O'.
+     * For communication with the client the player has a socket and associated
+     * Scanner and PrintWriter.
      */
     class Player implements Runnable {
+
         char id;
         Player opponent;
         Socket socket;
@@ -127,9 +132,9 @@ class Game {
             input = new Scanner(socket.getInputStream());
             output = new PrintWriter(socket.getOutputStream(), true);
             output.println("WELCOME " + id);
-            
-            System.out.println("Player "+ id +" is here!");
-            
+
+            System.out.println("Player " + id + " is here!");
+
             if (id == '1') {
                 currentPlayer = this;
                 output.println("MESSAGE Waiting for opponent to connect");

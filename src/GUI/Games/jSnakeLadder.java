@@ -1,6 +1,7 @@
 package GUI.Games;
 import Clients.SnakeLadderClient;
 import GUI.JHome;
+import GUI.jChat;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import java.util.Random;
@@ -10,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 
@@ -21,6 +24,13 @@ public class jSnakeLadder extends javax.swing.JPanel{
         _JHome = jh;
         
         client = new SnakeLadderClient(this);
+        
+        _jChat =  new jChat(_JHome.logedInUser.username);
+        chatPanel.add(_jChat);
+        chatPanel.repaint();
+        chatPanel.revalidate();
+        
+        
     }
      
     //Move Client
@@ -48,6 +58,7 @@ public class jSnakeLadder extends javax.swing.JPanel{
     
     public void quitGame() {
         client.QUIT();
+        _jChat._ChatClient.QUIT();
         _JHome.home();
     }
 
@@ -62,13 +73,9 @@ public class jSnakeLadder extends javax.swing.JPanel{
         GameName = new javax.swing.JLabel();
         dicePanel = new javax.swing.JPanel();
         bRollDice = new javax.swing.JButton();
-        diceTwoPanel = new javax.swing.JPanel();
-        diceOnePanel = new javax.swing.JPanel();
+        diceOneLabel = new javax.swing.JLabel();
+        diceTwoLabel = new javax.swing.JLabel();
         chatPanel = new javax.swing.JPanel();
-        enterMsg = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        chatArea = new javax.swing.JTextArea();
-        bSend = new javax.swing.JButton();
         gamePanel = new javax.swing.JPanel();
         jMessage = new javax.swing.JLabel();
         Board = new javax.swing.JLabel();
@@ -123,99 +130,38 @@ public class jSnakeLadder extends javax.swing.JPanel{
             }
         });
 
-        diceTwoPanel.setPreferredSize(new java.awt.Dimension(100, 100));
+        diceOneLabel.setText("jLabel1");
 
-        javax.swing.GroupLayout diceTwoPanelLayout = new javax.swing.GroupLayout(diceTwoPanel);
-        diceTwoPanel.setLayout(diceTwoPanelLayout);
-        diceTwoPanelLayout.setHorizontalGroup(
-            diceTwoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        diceTwoPanelLayout.setVerticalGroup(
-            diceTwoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        diceOnePanel.setPreferredSize(new java.awt.Dimension(100, 100));
-
-        javax.swing.GroupLayout diceOnePanelLayout = new javax.swing.GroupLayout(diceOnePanel);
-        diceOnePanel.setLayout(diceOnePanelLayout);
-        diceOnePanelLayout.setHorizontalGroup(
-            diceOnePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        diceOnePanelLayout.setVerticalGroup(
-            diceOnePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        diceTwoLabel.setText("jLabel2");
 
         javax.swing.GroupLayout dicePanelLayout = new javax.swing.GroupLayout(dicePanel);
         dicePanel.setLayout(dicePanelLayout);
         dicePanelLayout.setHorizontalGroup(
             dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dicePanelLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dicePanelLayout.createSequentialGroup()
-                        .addComponent(diceOnePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(diceTwoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))
+                .addContainerGap()
+                .addGroup(dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(dicePanelLayout.createSequentialGroup()
-                        .addComponent(bRollDice, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(diceOneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addComponent(diceTwoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bRollDice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         dicePanelLayout.setVerticalGroup(
             dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dicePanelLayout.createSequentialGroup()
+            .addGroup(dicePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(diceOnePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(diceTwoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(diceTwoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(diceOneLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(7, 7, 7)
                 .addComponent(bRollDice)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         chatPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        enterMsg.setText("enter text here");
-
-        chatArea.setEditable(false);
-        chatArea.setColumns(18);
-        chatArea.setRows(5);
-        chatArea.setText("Chat ");
-        chatArea.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        chatArea.setFocusable(false);
-        jScrollPane1.setViewportView(chatArea);
-
-        bSend.setText("Send");
-
-        javax.swing.GroupLayout chatPanelLayout = new javax.swing.GroupLayout(chatPanel);
-        chatPanel.setLayout(chatPanelLayout);
-        chatPanelLayout.setHorizontalGroup(
-            chatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(chatPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(chatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(chatPanelLayout.createSequentialGroup()
-                        .addComponent(enterMsg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bSend)))
-                .addContainerGap())
-        );
-        chatPanelLayout.setVerticalGroup(
-            chatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, chatPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(chatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(enterMsg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bSend))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        chatPanel.setLayout(new java.awt.CardLayout());
 
         gamePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -235,14 +181,14 @@ public class jSnakeLadder extends javax.swing.JPanel{
                 .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Board))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         gamePanelLayout.setVerticalGroup(
             gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gamePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(Board)
                 .addContainerGap())
         );
@@ -262,7 +208,7 @@ public class jSnakeLadder extends javax.swing.JPanel{
                     .addComponent(chatPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(dicePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(UserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -280,7 +226,7 @@ public class jSnakeLadder extends javax.swing.JPanel{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dicePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(chatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -308,13 +254,28 @@ public class jSnakeLadder extends javax.swing.JPanel{
 //        diceOnePanel.add(diceOneImg);
 //        diceTwoPanel.add(diceTwoImg);
 //        diceOnePanel.repaint();
-           JLabel imgLabel = new JLabel(new ImageIcon("C:\\Users\\Zyad\\Desktop\\Java Projcet\\GameStation\\src\\GUI\\Games\\dice\\dice1.png"));
-           diceOnePanel.add(imgLabel);
-           diceOnePanel.repaint();
+            String currentPath = System.getProperty("user.dir");
+            BufferedImage myPicture;
+        try {
+             Random rand = new Random();
+            int diceOne = rand.nextInt(6)+1;
+            int diceTwo = rand.nextInt(6)+1;
+            System.out.println(diceOne);
+            myPicture = ImageIO.read(new File(currentPath+"\\src\\GUI\\Games\\dice\\dice"+diceOne+".png"));
+            diceOneLabel.setIcon(new ImageIcon(myPicture));
+            myPicture = ImageIO.read(new File(currentPath+"\\src\\GUI\\Games\\dice\\dice"+diceTwo+".png"));
+            diceTwoLabel.setIcon(new ImageIcon(myPicture));
+            
+            client.MOVE(diceOne + diceTwo);
+        } catch (IOException ex) {
+            Logger.getLogger(jSnakeLadder.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
     }//GEN-LAST:event_bRollDiceMouseClicked
           
     //Parent
     private JHome _JHome;
+    private jChat _jChat;
     private SnakeLadderClient client;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Board;
@@ -324,15 +285,11 @@ public class jSnakeLadder extends javax.swing.JPanel{
     private javax.swing.JPanel UserPanel;
     private javax.swing.JButton bBack;
     private javax.swing.JButton bRollDice;
-    private javax.swing.JButton bSend;
-    private javax.swing.JTextArea chatArea;
     private javax.swing.JPanel chatPanel;
-    private javax.swing.JPanel diceOnePanel;
+    private javax.swing.JLabel diceOneLabel;
     private javax.swing.JPanel dicePanel;
-    private javax.swing.JPanel diceTwoPanel;
-    private javax.swing.JTextField enterMsg;
+    private javax.swing.JLabel diceTwoLabel;
     private javax.swing.JPanel gamePanel;
     private javax.swing.JLabel jMessage;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
