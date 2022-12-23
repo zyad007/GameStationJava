@@ -277,7 +277,7 @@ public class JHome extends javax.swing.JFrame {
     }//GEN-LAST:event_bSnakeLadderActionPerformed
 
     private void bSnakeLadderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bSnakeLadderMouseClicked
-        _jSnakeLadder = new jSnakeLadder(this);
+        _jSnakeLadder = new jSnakeLadder(this); 
         switchPanel(_jSnakeLadder);
         this.setSize(800, 600);
         this.setLocationRelativeTo(null);
