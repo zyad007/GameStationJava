@@ -1,4 +1,5 @@
 package GUI.Games;
+
 import Clients.SnakeLadderClient;
 import GUI.JHome;
 import GUI.jChat;
@@ -15,47 +16,57 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
+public class jSnakeLadder extends javax.swing.JPanel {
 
-public class jSnakeLadder extends javax.swing.JPanel{
-    
+    String CURRENT_PATH = System.getProperty("user.dir");
+    BufferedImage[] dices;
+
     public jSnakeLadder(JHome jh) {
         initComponents();
-        
+
         _JHome = jh;
-        
+
         client = new SnakeLadderClient(this);
-        
-        _jChat =  new jChat(_JHome.logedInUser.username);
+
+        _jChat = new jChat(_JHome.logedInUser.username);
         chatPanel.add(_jChat);
         chatPanel.repaint();
         chatPanel.revalidate();
-        
-        
+
+        dices = new BufferedImage[6];
+        CURRENT_PATH = System.getProperty("user.dir");
+        for (int i = 1; i <= 6; i++) {
+            try {
+                dices[i - 1] = ImageIO.read(new File(CURRENT_PATH + "\\src\\GUI\\Games\\dice\\dice" + i + ".png"));
+            } catch (IOException ex) {
+                Logger.getLogger(jSnakeLadder.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-     
+
     //Move Client
     private void move(int step) {
         client.MOVE(step);
     }
-    
+
     //UI Changes Functions
     public void showDialog(String message) {
         JOptionPane.showMessageDialog(_JHome, message);
     }
-    
+
     public void setTextMessage(String message) {
         //Set the Text Message
         jMessage.setText(message);
     }
-    
+
     public void setPlayerLocation(int location) {
         //Move player to location
     }
-    
+
     public void setOponentLocation(int location) {
         //Move player to Oponent
     }
-    
+
     public void quitGame() {
         client.QUIT();
         _jChat._ChatClient.QUIT();
@@ -238,41 +249,22 @@ public class jSnakeLadder extends javax.swing.JPanel{
         int result = JOptionPane.showConfirmDialog(_JHome, "Sure? you want ot Quit?",
                 "Game Station",
                 JOptionPane.YES_NO_OPTION,
-               JOptionPane.QUESTION_MESSAGE);
-        if(result == JOptionPane.YES_OPTION) quitGame();
+                JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION)
+            quitGame();
     }//GEN-LAST:event_bBackMouseClicked
-    
-    
+
     // roll dice botton
     private void bRollDiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bRollDiceMouseClicked
-        // TODO add your handling code here:
-//        Random rand = new Random();
-//        int diceOne = rand.nextInt(1,7);
-//        int diceTwo = rand.nextInt(1,7);
-//        JLabel diceOneImg = ImageHandler.loadImage("dice/dice"+diceOne+".png");
-//        JLabel diceTwoImg = ImageHandler.loadImage("dice/dice"+diceTwo+".png");
-//        diceOnePanel.add(diceOneImg);
-//        diceTwoPanel.add(diceTwoImg);
-//        diceOnePanel.repaint();
-            String currentPath = System.getProperty("user.dir");
-            BufferedImage myPicture;
-        try {
-             Random rand = new Random();
-            int diceOne = rand.nextInt(6)+1;
-            int diceTwo = rand.nextInt(6)+1;
-            System.out.println(diceOne);
-            myPicture = ImageIO.read(new File(currentPath+"\\src\\GUI\\Games\\dice\\dice"+diceOne+".png"));
-            diceOneLabel.setIcon(new ImageIcon(myPicture));
-            myPicture = ImageIO.read(new File(currentPath+"\\src\\GUI\\Games\\dice\\dice"+diceTwo+".png"));
-            diceTwoLabel.setIcon(new ImageIcon(myPicture));
-            
-            client.MOVE(diceOne + diceTwo);
-        } catch (IOException ex) {
-            Logger.getLogger(jSnakeLadder.class.getName()).log(Level.SEVERE, null, ex);
-        }
-          
+        Random rand = new Random();
+        int diceOne = rand.nextInt(6) + 1;
+        int diceTwo = rand.nextInt(6) + 1;
+        diceOneLabel.setIcon(new ImageIcon(dices[diceOne - 1]));
+        diceTwoLabel.setIcon(new ImageIcon(dices[diceTwo - 1]));
+
+        client.MOVE(diceOne + diceTwo);
     }//GEN-LAST:event_bRollDiceMouseClicked
-          
+
     //Parent
     private JHome _JHome;
     private jChat _jChat;
