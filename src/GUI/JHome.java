@@ -164,6 +164,11 @@ public class JHome extends javax.swing.JFrame {
 
         bXO.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bXO.setText("XO");
+        bXO.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bXOMouseClicked(evt);
+            }
+        });
 
         jButton4.setText("??");
 
@@ -291,6 +296,10 @@ public class JHome extends javax.swing.JFrame {
         startUp.setVisible(true);
     }//GEN-LAST:event_bLogoutMouseClicked
 
+    private void bXOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bXOMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bXOMouseClicked
+
     
     /**
      * @param args the command line arguments
@@ -331,7 +340,7 @@ public class JHome extends javax.swing.JFrame {
     //Games GUI Panels
     private jSnakeLadder _jSnakeLadder;
     public User logedInUser ;
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel _Dashboard;
     private javax.swing.JButton bConnect4;
