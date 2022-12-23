@@ -98,7 +98,7 @@ public class Connect4Client {
             e.printStackTrace();
         } finally {
             socket.close();
-        }
+        } 
     }
     public void MOVE(int step) {
         out.println("MOVE "+ step);
