@@ -20,7 +20,12 @@ public class jSnakeLadder extends javax.swing.JPanel {
 
     String CURRENT_PATH = System.getProperty("user.dir");
     BufferedImage[] dices;
-
+    JPanel[] playerPosition;
+    BufferedImage p1Icon;
+    BufferedImage p2Icon;
+    int currenntP1Location = 1;
+    int currenntP2Location = 1;
+    
     public jSnakeLadder(JHome jh) {
         initComponents();
 
@@ -33,6 +38,16 @@ public class jSnakeLadder extends javax.swing.JPanel {
         chatPanel.repaint();
         chatPanel.revalidate();
 
+        loadDiceImages();
+
+        loadBoardImage();
+
+        gridPlayerLocation();
+        
+        playerPosition[5 - 1].setBackground(Color.red);
+    }
+
+    private void loadDiceImages()  {
         dices = new BufferedImage[6];
         CURRENT_PATH = System.getProperty("user.dir");
         for (int i = 1; i <= 6; i++) {
@@ -43,7 +58,64 @@ public class jSnakeLadder extends javax.swing.JPanel {
             }
         }
     }
+    
+    private  void  loadBoardImage() {
+        
+        
+         JPanel glass = new JPanel(new BorderLayout());
+        glass.setSize(500, 500);
 
+        BufferedImage img;
+        try {
+            p1Icon = ImageIO.read(new File(CURRENT_PATH + "\\src\\Icons\\player1.png"));
+            p2Icon = ImageIO.read(new File(CURRENT_PATH + "\\src\\Icons\\player2.png"));
+            
+            img = ImageIO.read(new File(CURRENT_PATH + "\\src\\Icons\\Snake & Ladder.jpg"));
+            JLabel imgg = new JLabel();
+            imgg.setIcon(new ImageIcon(img));
+            glass.add(imgg, BorderLayout.CENTER);
+        } catch (IOException ex) {
+            Logger.getLogger(jSnakeLadder.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        LayeredBoard.add(glass, 1);
+    }
+    
+    private void gridPlayerLocation() {
+        JPanel panel = new JPanel();
+        panel.setOpaque(false);
+        panel.setLayout(new GridLayout(10, 10, 2, 2));
+        playerPosition = new JPanel[100];
+        int j = 1;
+        for (int i = 0; i < 100; i++) {
+            if (j == 21) {
+                j = 1;
+            }
+            int boardIndex = 0;
+            if ((i / 10) % 2 == 0) {
+                boardIndex = 100 - i;
+            } else {
+                boardIndex = 90 - i + j;
+                j += 2;
+            }
+            
+            JPanel s = new JPanel();
+            JLayeredPane lp = new JLayeredPane();
+            lp.setSize(50, 50);
+            lp.setOpaque(false);
+            s.add(lp, BorderLayout.CENTER);
+        
+            s.setOpaque(false);
+            playerPosition[boardIndex - 1] = s;
+            panel.add(s);
+        }
+        panel.setSize(500, 500);
+
+        LayeredBoard.add(panel, Integer.valueOf(2));
+        
+        playerPosition[0].add(new JLabel(new ImageIcon(p1Icon)), BorderLayout.CENTER);
+        playerPosition[0].add(new JLabel(new ImageIcon(p2Icon)), BorderLayout.CENTER);
+    }
+    
     //Move Client
     private void move(int step) {
         client.MOVE(step);
@@ -60,11 +132,15 @@ public class jSnakeLadder extends javax.swing.JPanel {
     }
 
     public void setPlayerLocation(int location) {
-        //Move player to location
+//        
+//        playerPosition[location-1].add(new JLabel(new ImageIcon(p1Icon)), Integer.valueOf(1));;
+//        currenntP1Location = location;
     }
 
     public void setOponentLocation(int location) {
-        //Move player to Oponent
+        playerPosition[currenntP2Location-1].removeAll();
+        playerPosition[location-1].add(new JLabel(new ImageIcon(p2Icon)), BorderLayout.CENTER);
+        currenntP2Location = location;
     }
 
     public void quitGame() {
@@ -89,7 +165,7 @@ public class jSnakeLadder extends javax.swing.JPanel {
         chatPanel = new javax.swing.JPanel();
         gamePanel = new javax.swing.JPanel();
         jMessage = new javax.swing.JLabel();
-        Board = new javax.swing.JLabel();
+        LayeredBoard = new javax.swing.JLayeredPane();
 
         setPreferredSize(new java.awt.Dimension(800, 550));
 
@@ -114,14 +190,14 @@ public class jSnakeLadder extends javax.swing.JPanel {
             .addGroup(UserPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(UserNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(UserAvatarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         UserPanelLayout.setVerticalGroup(
             UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UserPanelLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(UserAvatarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(UserNameLabel))
@@ -154,7 +230,7 @@ public class jSnakeLadder extends javax.swing.JPanel {
                 .addGroup(dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(dicePanelLayout.createSequentialGroup()
                         .addComponent(diceOneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                         .addComponent(diceTwoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(bRollDice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -181,7 +257,16 @@ public class jSnakeLadder extends javax.swing.JPanel {
         jMessage.setText("message");
         jMessage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        Board.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Snake & Ladder.jpg"))); // NOI18N
+        javax.swing.GroupLayout LayeredBoardLayout = new javax.swing.GroupLayout(LayeredBoard);
+        LayeredBoard.setLayout(LayeredBoardLayout);
+        LayeredBoardLayout.setHorizontalGroup(
+            LayeredBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        LayeredBoardLayout.setVerticalGroup(
+            LayeredBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout gamePanelLayout = new javax.swing.GroupLayout(gamePanel);
         gamePanel.setLayout(gamePanelLayout);
@@ -189,19 +274,19 @@ public class jSnakeLadder extends javax.swing.JPanel {
             gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gamePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Board))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(LayeredBoard)
+                    .addComponent(jMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         gamePanelLayout.setVerticalGroup(
             gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gamePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(Board)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LayeredBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -220,7 +305,7 @@ public class jSnakeLadder extends javax.swing.JPanel {
                     .addComponent(dicePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(UserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(gamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -270,8 +355,8 @@ public class jSnakeLadder extends javax.swing.JPanel {
     private jChat _jChat;
     private SnakeLadderClient client;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Board;
     private javax.swing.JLabel GameName;
+    private javax.swing.JLayeredPane LayeredBoard;
     private javax.swing.JLabel UserAvatarIcon;
     private javax.swing.JLabel UserNameLabel;
     private javax.swing.JPanel UserPanel;
