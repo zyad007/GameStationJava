@@ -61,12 +61,14 @@ public class SnakeLadderClient {
             System.out.println("Snake Stairs: Player " + mark);
             while (in.hasNextLine()) {
                 response = in.nextLine();
+                System.out.println(response);
                 
                 if (response.startsWith("MOVED")) {
                     
                     int location = Integer.parseInt(response.substring(6));
                     _jSnakeLadder.setTextMessage("You moved to: " + location);
                     _jSnakeLadder.setPlayerLocation(location);
+                    
                     
                 } else if (response.startsWith("OPPONENT_MOVED")) {
                     

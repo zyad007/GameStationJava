@@ -50,7 +50,7 @@ class GameSnakeLadder {
     private int[] ladderTails = {1, 21 , 80 ,28 , 4 , 9 ,51,72};
 
     private int checkSnakeOrLadder(int location) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 8; i++) {
             if (location == snakeHeads[i]) {
                 return snakeTails[i];
             }
