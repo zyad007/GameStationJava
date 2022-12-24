@@ -37,7 +37,7 @@ class GameConnect4 {
     private int counter[]={6,6,6,6,6,6,6} ;
     public GameConnect4()
     {   // constructor
-        board = new String[6][7];   
+        board = new String[7][7];   
     }
     Player currentPlayer;
     
@@ -68,7 +68,7 @@ class GameConnect4 {
      private String checkhorizontalWinner()
    {
        String symbol = null ;
-       for(int i=0 ; i<6 ; i++)
+       for(int i=0 ; i<7 ; i++)
        {
            for(int j=0 ; j<4 ; j++ )
            {
@@ -152,7 +152,7 @@ class GameConnect4 {
     }
     private boolean board_isFull()
     {   boolean isFull = true ;
-        for(int i=0 ; i<6 ; i++)
+        for(int i=0 ; i<7 ; i++)
         {
             for(int j=0 ; j<7 ; j++)
             {
@@ -199,10 +199,10 @@ class GameConnect4 {
          {
             throw new IllegalStateException("Coloum is Full");
          }
-          if(x>7)
-         {
-            throw new IllegalStateException("Worng input");
-         }
+//          if(x>7)
+//         {
+//            throw new IllegalStateException("Worng input");
+//         }
          String S = ""+x+" "+y ;
         if(player.id == '1') {
            board[step][counter[step]] = "1" ;
