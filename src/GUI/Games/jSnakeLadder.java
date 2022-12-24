@@ -23,9 +23,10 @@ public class jSnakeLadder extends javax.swing.JPanel {
     JPanel[] playerPosition;
     BufferedImage p1Icon;
     BufferedImage p2Icon;
+    BufferedImage winnerIcon;
     int currenntP1Location = 1;
     int currenntP2Location = 1;
-    
+
     public jSnakeLadder(JHome jh) {
         initComponents();
 
@@ -33,21 +34,23 @@ public class jSnakeLadder extends javax.swing.JPanel {
 
         client = new SnakeLadderClient(this);
 
-        _jChat = new jChat(_JHome.logedInUser.username);
-        chatPanel.add(_jChat);
-        chatPanel.repaint();
-        chatPanel.revalidate();
+        initChat();
 
         loadDiceImages();
 
         loadBoardImage();
 
         gridPlayerLocation();
-        
-        playerPosition[5 - 1].setBackground(Color.red);
     }
 
-    private void loadDiceImages()  {
+    private void initChat() {
+        _jChat = new jChat(_JHome.logedInUser.username);
+        chatPanel.add(_jChat);
+        chatPanel.repaint();
+        chatPanel.revalidate();
+    }
+
+    private void loadDiceImages() {
         dices = new BufferedImage[6];
         CURRENT_PATH = System.getProperty("user.dir");
         for (int i = 1; i <= 6; i++) {
@@ -58,18 +61,17 @@ public class jSnakeLadder extends javax.swing.JPanel {
             }
         }
     }
-    
-    private  void  loadBoardImage() {
-        
-        
-         JPanel glass = new JPanel(new BorderLayout());
+
+    private void loadBoardImage() {
+        JPanel glass = new JPanel(new BorderLayout());
         glass.setSize(500, 500);
 
         BufferedImage img;
         try {
             p1Icon = ImageIO.read(new File(CURRENT_PATH + "\\src\\Icons\\player1.png"));
             p2Icon = ImageIO.read(new File(CURRENT_PATH + "\\src\\Icons\\player2.png"));
-            
+            winnerIcon = ImageIO.read(new File(CURRENT_PATH + "\\src\\Icons\\winner.png"));
+
             img = ImageIO.read(new File(CURRENT_PATH + "\\src\\Icons\\Snake & Ladder.jpg"));
             JLabel imgg = new JLabel();
             imgg.setIcon(new ImageIcon(img));
@@ -79,7 +81,7 @@ public class jSnakeLadder extends javax.swing.JPanel {
         }
         LayeredBoard.add(glass, 1);
     }
-    
+
     private void gridPlayerLocation() {
         JPanel panel = new JPanel();
         panel.setOpaque(false);
@@ -97,13 +99,9 @@ public class jSnakeLadder extends javax.swing.JPanel {
                 boardIndex = 90 - i + j;
                 j += 2;
             }
-            
+
             JPanel s = new JPanel();
-            JLayeredPane lp = new JLayeredPane();
-            lp.setSize(50, 50);
-            lp.setOpaque(false);
-            s.add(lp, BorderLayout.CENTER);
-        
+
             s.setOpaque(false);
             playerPosition[boardIndex - 1] = s;
             panel.add(s);
@@ -111,11 +109,11 @@ public class jSnakeLadder extends javax.swing.JPanel {
         panel.setSize(500, 500);
 
         LayeredBoard.add(panel, Integer.valueOf(2));
-        
+
         playerPosition[0].add(new JLabel(new ImageIcon(p1Icon)), BorderLayout.CENTER);
         playerPosition[0].add(new JLabel(new ImageIcon(p2Icon)), BorderLayout.CENTER);
     }
-    
+
     //Move Client
     private void move(int step) {
         client.MOVE(step);
@@ -131,16 +129,32 @@ public class jSnakeLadder extends javax.swing.JPanel {
         jMessage.setText(message);
     }
 
-    public void setPlayerLocation(int location) {
-//        
-//        playerPosition[location-1].add(new JLabel(new ImageIcon(p1Icon)), Integer.valueOf(1));;
-//        currenntP1Location = location;
+    public void setPlayerLocation(int location){
+        if(location > 99) {
+            playerPosition[99].add(new JLabel(new ImageIcon(winnerIcon)), BorderLayout.CENTER);
+            return;
+        }
+        playerPosition[currenntP1Location - 1].removeAll();
+        if(currenntP1Location == currenntP2Location) playerPosition[currenntP1Location - 1].add(new JLabel(new ImageIcon(p2Icon)), BorderLayout.CENTER);
+            
+        playerPosition[location - 1].add(new JLabel(new ImageIcon(p1Icon)), BorderLayout.CENTER);
+        currenntP1Location = location;
+        repaint();
+        revalidate();
     }
 
     public void setOponentLocation(int location) {
-        playerPosition[currenntP2Location-1].removeAll();
-        playerPosition[location-1].add(new JLabel(new ImageIcon(p2Icon)), BorderLayout.CENTER);
+        if(location > 99) {
+            playerPosition[99].add(new JLabel(new ImageIcon(winnerIcon)), BorderLayout.CENTER);
+            return;
+        }
+        playerPosition[currenntP2Location - 1].removeAll();
+        if(currenntP1Location == currenntP2Location) playerPosition[currenntP1Location - 1].add(new JLabel(new ImageIcon(p1Icon)), BorderLayout.CENTER);
+        
+        playerPosition[location - 1].add(new JLabel(new ImageIcon(p2Icon)), BorderLayout.CENTER);
         currenntP2Location = location;
+        repaint();
+        revalidate();
     }
 
     public void quitGame() {

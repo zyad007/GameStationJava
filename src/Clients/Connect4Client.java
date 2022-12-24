@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Clients;
+import GUI.Games.jConnect4;
 import GUI.Games.jSnakeLadder;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,9 +20,9 @@ public class Connect4Client {
      private Socket socket;
     private Scanner in;
     private PrintWriter out;
-    private jSnakeLadder _jConnect4; // TO BE FOR CONNECT 4
+    private jConnect4 _jConnect4; // TO BE FOR CONNECT 4
     
-    public Connect4Client(jSnakeLadder ssg) {
+    public Connect4Client(jConnect4 ssg) {
         _jConnect4 = ssg;
         try{
         socket = new Socket("localhost", 59071);
@@ -49,7 +50,7 @@ public class Connect4Client {
             System.out.println("Connect 4 player: Player " + mark);
             while (in.hasNextLine()) {
                 response = in.nextLine();
-                
+                System.out.println(response);
                 if (response.startsWith("MOVED")) {
                     String string_number = response.substring(6) ;
                     StringTokenizer st = new StringTokenizer(string_number);
@@ -57,7 +58,8 @@ public class Connect4Client {
                     rows = Integer.parseInt(st.nextToken());
                     coloums = Integer.parseInt(st.nextToken());
                     
-                    
+                    _jConnect4.movePlayer(rows, coloums);
+                    _jConnect4.setTextMessage("You moved to: "+rows+" "+coloums+", opponent turn");
                     
                 } else if (response.startsWith("OPPONENT_MOVED")) {
                     
@@ -67,6 +69,7 @@ public class Connect4Client {
                     int rows , coloums ;
                     rows = Integer.parseInt(st2.nextToken());
                     coloums = Integer.parseInt(st2.nextToken());
+                    _jConnect4.moveOponenet(rows, coloums);
                     _jConnect4.setTextMessage("Opponent moved to: "+rows+" "+coloums+", your turn");
                     
                 } else if (response.startsWith("MESSAGE")) {
