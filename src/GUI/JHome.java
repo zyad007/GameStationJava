@@ -5,6 +5,7 @@
 package GUI;
 
 import Entities.User;
+import GUI.Games.jConnect4;
 import GUI.Games.jSnakeLadder;
 import GUI.StartUp.JStartUp;
 import java.awt.Dimension;
@@ -174,6 +175,11 @@ public class JHome extends javax.swing.JFrame {
 
         bConnect4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bConnect4.setText("CONNECT4");
+        bConnect4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bConnect4MouseClicked(evt);
+            }
+        });
 
         jButton6.setText("??");
 
@@ -300,6 +306,13 @@ public class JHome extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bXOMouseClicked
 
+    private void bConnect4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bConnect4MouseClicked
+        _jConnect4 = new jConnect4(this); 
+        switchPanel(_jConnect4);
+        this.setSize(895, 705);
+        this.setLocationRelativeTo(null);
+    }//GEN-LAST:event_bConnect4MouseClicked
+
     
     /**
      * @param args the command line arguments
@@ -339,7 +352,9 @@ public class JHome extends javax.swing.JFrame {
     
     //Games GUI Panels
     private jSnakeLadder _jSnakeLadder;
+    private jConnect4 _jConnect4;
     public User logedInUser ;
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel _Dashboard;
