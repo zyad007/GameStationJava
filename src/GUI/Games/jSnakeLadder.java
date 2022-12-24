@@ -41,6 +41,9 @@ public class jSnakeLadder extends javax.swing.JPanel {
         loadBoardImage();
 
         gridPlayerLocation();
+        
+        UserNameLabel.setText(_JHome.logedInUser.username);
+        UserAvatarIcon.setIcon(new ImageIcon(_JHome.userIcon));
     }
 
     private void initChat() {
@@ -128,6 +131,8 @@ public class jSnakeLadder extends javax.swing.JPanel {
         //Set the Text Message
         jMessage.setText(message);
     }
+    
+    
 
     public void setPlayerLocation(int location){
         if(location > 99) {

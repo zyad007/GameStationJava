@@ -9,6 +9,7 @@ import GUI.JHome;
 import IServices.IUserServices;
 import Services.UserServices;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -22,8 +23,17 @@ public class jSignUp extends javax.swing.JPanel {
     public jSignUp(JStartUp jsu) {
         initComponents();
         _UserServices = new UserServices();
+
         _JStartUp = jsu;
     }
+    
+    public int getIcon(){
+        return icon;
+    }
+    public void setIcon(int icon){
+        this.icon=icon;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,6 +52,8 @@ public class jSignUp extends javax.swing.JPanel {
         tUsername = new javax.swing.JTextField();
         tPassword = new javax.swing.JPasswordField();
         tConfirmPassword = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         bSignUp.setText("Sign Up");
         bSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -68,50 +80,71 @@ public class jSignUp extends javax.swing.JPanel {
 
         jLabel5.setText("CONFIRM PASSWPRD");
 
+        jLabel2.setText("jLabel2");
+
+        jButton1.setText("jButton1");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(bSignUp)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tConfirmPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                            .addComponent(tPassword)
-                            .addComponent(tUsername)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(bLogin)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 318, Short.MAX_VALUE)
+                                .addComponent(bLogin))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tConfirmPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(bSignUp)
-                .addContainerGap(168, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(tConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(bSignUp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
                 .addComponent(bLogin)
                 .addContainerGap())
         );
@@ -121,65 +154,71 @@ public class jSignUp extends javax.swing.JPanel {
     private void bLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bLoginMouseClicked
         _JStartUp.home();
     }//GEN-LAST:event_bLoginMouseClicked
-    
+
     // Sign In -> Home
     private void bSignUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bSignUpMouseClicked
 
-        String name=tUsername.getText().toString();
-        String pass=tPassword.getText().toString();
-        String coPass=tConfirmPassword.getText().toString();
-        if(name.equals("")){
+        String name = tUsername.getText().toString();
+        String pass = tPassword.getText().toString();
+        String coPass = tConfirmPassword.getText().toString();
+        if (name.equals("")) {
             JOptionPane.showMessageDialog(null, "PLS ENTER USERNAME");
-        }
-        else if(pass.equals("")){
+        } else if (pass.equals("")) {
             JOptionPane.showMessageDialog(null, "PLS ENTER PASSWORD");
-        }
-        else if(coPass.equals("")){
+        } else if (coPass.equals("")) {
             JOptionPane.showMessageDialog(null, "PLS ENTER CONFIRM PASSWORD");
-        }
-        else if(!pass.equals(coPass)){
+        } else if (!pass.equals(coPass)) {
             JOptionPane.showMessageDialog(null, " password and confirm password doesn't match");
         }
-        if(!name.equals("")&&!pass.equals("")&&!coPass.equals("")&&pass.equals(coPass))
-        {
-        
-        if(_UserServices.getByUsername(name) != null)  {
-            JOptionPane.showMessageDialog(null, "Username already in user");
-            return;
-        }
-        
-        User user = new User();
-        user.username = name;
-        user.password = pass;
-        
-        _UserServices.signUp(user);
-        
-        JOptionPane.showMessageDialog(null, "Account created successfully "+name);
-        
-        //Add Sign Up
-        if(true) {
-            _JStartUp.dispose();
-            JHome _JHome=new JHome();
-            _JHome.setLogedInUser(user);
-            _JHome.setLocationRelativeTo(null);
-            _JHome.setResizable(false);
-            _JHome.setVisible(true);
-        }
+        if (!name.equals("") && !pass.equals("") && !coPass.equals("") && pass.equals(coPass)) {
+
+            if (_UserServices.getByUsername(name) != null) {
+                JOptionPane.showMessageDialog(null, "Username already in user");
+                return;
+            }
+
+            User user = new User();
+            user.username = name;
+            user.password = pass;
+            user.icon = getIcon();
+
+            _UserServices.signUp(user);
+
+            JOptionPane.showMessageDialog(null, "Account created successfully " + name);
+
+            //Add Sign Up
+            if (true) {
+                _JStartUp.dispose();
+                JHome _JHome = new JHome();
+                _JHome.setLogedInUser(user);
+                _JHome.setLocationRelativeTo(null);
+                _JHome.setResizable(false);
+                _JHome.setVisible(true);
+            }
         }
     }//GEN-LAST:event_bSignUpMouseClicked
 
     private void bSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSignUpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bSignUpActionPerformed
-    
-    
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+
+        JIcon _icon = new JIcon(this);    
+        _icon.setVisible(true);
+
+    }//GEN-LAST:event_jButton1MouseClicked
+
     private JStartUp _JStartUp;
     private IUserServices _UserServices;
- 
+    private JIcon _Icon;
+    private int icon;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bLogin;
     private javax.swing.JButton bSignUp;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField tConfirmPassword;
