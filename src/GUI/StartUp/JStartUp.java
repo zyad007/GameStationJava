@@ -165,7 +165,7 @@ public class JStartUp extends javax.swing.JFrame {
         
         if(user != null) {
             this.dispose();
-            JHome _JHome=new JHome();
+             JHome _JHome=new JHome();
             _JHome.setLogedInUser(user);
             _JHome.setLocationRelativeTo(null);
             _JHome.setResizable(false);
