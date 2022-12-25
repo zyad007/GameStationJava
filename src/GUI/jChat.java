@@ -56,8 +56,12 @@ public class jChat extends javax.swing.JPanel {
             }
         });
 
-        enterMsg.setText("Enter text here..");
         enterMsg.setToolTipText("");
+        enterMsg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterMsgActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -89,6 +93,10 @@ public class jChat extends javax.swing.JPanel {
     private void bSendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bSendMouseClicked
         _ChatClient.MESSAGE(enterMsg.getText());
     }//GEN-LAST:event_bSendMouseClicked
+
+    private void enterMsgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterMsgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enterMsgActionPerformed
 
     public ChatClient _ChatClient;
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -81,9 +81,11 @@
     </Component>
     <Component class="javax.swing.JTextField" name="enterMsg">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Enter text here.."/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enterMsgActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

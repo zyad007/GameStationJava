@@ -29,6 +29,8 @@ public class jSnakeLadder extends javax.swing.JPanel {
 
     public jSnakeLadder(JHome jh) {
         initComponents();
+        
+        setBackground(new Color(230,240,249));
 
         _JHome = jh;
 
@@ -42,8 +44,13 @@ public class jSnakeLadder extends javax.swing.JPanel {
 
         gridPlayerLocation();
         
-        UserNameLabel.setText(_JHome.logedInUser.username);
-        UserAvatarIcon.setIcon(new ImageIcon(_JHome.userIcon));
+        try {
+            UserNameLabel.setText(_JHome.logedInUser.username);
+            UserAvatarIcon.setIcon(new ImageIcon(_JHome.userIcon));
+            Score.setText(""+_JHome.logedInUser.global_score);
+        }catch(Exception e) {
+            
+        }
     }
 
     private void initChat() {
@@ -137,6 +144,8 @@ public class jSnakeLadder extends javax.swing.JPanel {
     public void setPlayerLocation(int location){
         if(location > 99) {
             playerPosition[99].add(new JLabel(new ImageIcon(winnerIcon)), BorderLayout.CENTER);
+            playerPosition[currenntP1Location - 1].removeAll();
+            if(currenntP1Location == currenntP2Location) playerPosition[currenntP1Location - 1].add(new JLabel(new ImageIcon(p2Icon)), BorderLayout.CENTER);
             return;
         }
         playerPosition[currenntP1Location - 1].removeAll();
@@ -151,6 +160,8 @@ public class jSnakeLadder extends javax.swing.JPanel {
     public void setOponentLocation(int location) {
         if(location > 99) {
             playerPosition[99].add(new JLabel(new ImageIcon(winnerIcon)), BorderLayout.CENTER);
+            playerPosition[currenntP2Location - 1].removeAll();
+            if(currenntP1Location == currenntP2Location) playerPosition[currenntP1Location - 1].add(new JLabel(new ImageIcon(p1Icon)), BorderLayout.CENTER);
             return;
         }
         playerPosition[currenntP2Location - 1].removeAll();
@@ -163,9 +174,9 @@ public class jSnakeLadder extends javax.swing.JPanel {
     }
 
     public void quitGame() {
+        _JHome.home();
         client.QUIT();
         _jChat._ChatClient.QUIT();
-        _JHome.home();
     }
 
     @SuppressWarnings("unchecked")
@@ -174,8 +185,11 @@ public class jSnakeLadder extends javax.swing.JPanel {
 
         bBack = new javax.swing.JButton();
         UserPanel = new javax.swing.JPanel();
-        UserNameLabel = new javax.swing.JLabel();
+        label1 = new javax.swing.JLabel();
         UserAvatarIcon = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        UserNameLabel = new javax.swing.JLabel();
+        Score = new javax.swing.JLabel();
         GameName = new javax.swing.JLabel();
         dicePanel = new javax.swing.JPanel();
         bRollDice = new javax.swing.JButton();
@@ -197,30 +211,55 @@ public class jSnakeLadder extends javax.swing.JPanel {
 
         UserPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        UserNameLabel.setText("User name");
+        label1.setText("Username :");
 
         UserAvatarIcon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         UserAvatarIcon.setText("          Icon");
+
+        jLabel1.setText("Level :");
+
+        UserNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        UserNameLabel.setForeground(new java.awt.Color(0, 51, 255));
+        UserNameLabel.setText("1");
+
+        Score.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Score.setForeground(new java.awt.Color(0, 51, 255));
+        Score.setText("1");
 
         javax.swing.GroupLayout UserPanelLayout = new javax.swing.GroupLayout(UserPanel);
         UserPanel.setLayout(UserPanelLayout);
         UserPanelLayout.setHorizontalGroup(
             UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(UserPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(UserNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addGroup(UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(label1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(UserAvatarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Score)
+                    .addComponent(UserNameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(UserAvatarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         UserPanelLayout.setVerticalGroup(
             UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UserPanelLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+            .addGroup(UserPanelLayout.createSequentialGroup()
                 .addGroup(UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(UserAvatarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UserNameLabel))
-                .addGap(22, 22, 22))
+                    .addGroup(UserPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(UserAvatarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(UserPanelLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label1)
+                            .addComponent(UserNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(Score, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         GameName.setFont(new java.awt.Font("Old English Text MT", 1, 18)); // NOI18N
@@ -236,8 +275,10 @@ public class jSnakeLadder extends javax.swing.JPanel {
             }
         });
 
+        diceOneLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Games/dice/dice6.png"))); // NOI18N
         diceOneLabel.setText("jLabel1");
 
+        diceTwoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Games/dice/dice6.png"))); // NOI18N
         diceTwoLabel.setText("jLabel2");
 
         javax.swing.GroupLayout dicePanelLayout = new javax.swing.GroupLayout(dicePanel);
@@ -263,7 +304,7 @@ public class jSnakeLadder extends javax.swing.JPanel {
                     .addComponent(diceOneLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(7, 7, 7)
                 .addComponent(bRollDice)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         chatPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -337,7 +378,7 @@ public class jSnakeLadder extends javax.swing.JPanel {
                             .addComponent(bBack)
                             .addComponent(GameName))
                         .addGap(18, 18, 18)
-                        .addComponent(UserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(UserPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dicePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -376,6 +417,7 @@ public class jSnakeLadder extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel GameName;
     private javax.swing.JLayeredPane LayeredBoard;
+    private javax.swing.JLabel Score;
     private javax.swing.JLabel UserAvatarIcon;
     private javax.swing.JLabel UserNameLabel;
     private javax.swing.JPanel UserPanel;
@@ -386,6 +428,8 @@ public class jSnakeLadder extends javax.swing.JPanel {
     private javax.swing.JPanel dicePanel;
     private javax.swing.JLabel diceTwoLabel;
     private javax.swing.JPanel gamePanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jMessage;
+    private javax.swing.JLabel label1;
     // End of variables declaration//GEN-END:variables
 }

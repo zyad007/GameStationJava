@@ -36,6 +36,8 @@ public class jConnect4 extends javax.swing.JPanel {
     public jConnect4(JHome jh) {
         initComponents();
         
+        setBackground(new Color(230,240,249));
+        
         _JHome = jh;
         
         client = new Connect4Client(this);
@@ -45,6 +47,15 @@ public class jConnect4 extends javax.swing.JPanel {
         gridPlayerLocation();
         
         loadBoardImage();
+        
+        
+        try {
+            UserNameLabel.setText(_JHome.logedInUser.username);
+            UserAvatarIcon.setIcon(new ImageIcon(_JHome.userIcon));
+            Score.setText(""+_JHome.logedInUser.global_score);
+        }catch(Exception e) {
+            
+        }
     }
 
     private void initChat() {
@@ -94,9 +105,9 @@ public class jConnect4 extends javax.swing.JPanel {
     }
     
     public void quitGame() {
+        _JHome.home();
         client.QUIT();
         _jChat._ChatClient.QUIT();
-        _JHome.home();
     }
     
     public void movePlayer(int r,  int c) {
@@ -122,8 +133,11 @@ public class jConnect4 extends javax.swing.JPanel {
 
         bBack = new javax.swing.JButton();
         UserPanel = new javax.swing.JPanel();
-        UserNameLabel = new javax.swing.JLabel();
         UserAvatarIcon = new javax.swing.JLabel();
+        labbel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        Score = new javax.swing.JLabel();
+        UserNameLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jMessage = new javax.swing.JLabel();
         LayeredBoard = new javax.swing.JLayeredPane();
@@ -146,30 +160,55 @@ public class jConnect4 extends javax.swing.JPanel {
 
         UserPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        UserNameLabel.setText("User name");
-
         UserAvatarIcon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         UserAvatarIcon.setText("          Icon");
+
+        labbel.setText("Username :");
+
+        jLabel1.setText("Level :");
+
+        Score.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Score.setForeground(new java.awt.Color(0, 51, 255));
+        Score.setText("1");
+
+        UserNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        UserNameLabel.setForeground(new java.awt.Color(0, 51, 255));
+        UserNameLabel.setText("1");
 
         javax.swing.GroupLayout UserPanelLayout = new javax.swing.GroupLayout(UserPanel);
         UserPanel.setLayout(UserPanelLayout);
         UserPanelLayout.setHorizontalGroup(
             UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(UserPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(UserNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UserPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(labbel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(UserAvatarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Score)
+                    .addComponent(UserNameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(UserAvatarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         UserPanelLayout.setVerticalGroup(
             UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UserPanelLayout.createSequentialGroup()
-                .addContainerGap(93, Short.MAX_VALUE)
+            .addGroup(UserPanelLayout.createSequentialGroup()
                 .addGroup(UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(UserAvatarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UserNameLabel))
-                .addGap(22, 22, 22))
+                    .addGroup(UserPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(UserAvatarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(UserPanelLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labbel)
+                            .addComponent(UserNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(Score, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -385,6 +424,7 @@ public class jConnect4 extends javax.swing.JPanel {
     private jChat _jChat;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane LayeredBoard;
+    private javax.swing.JLabel Score;
     private javax.swing.JLabel UserAvatarIcon;
     private javax.swing.JLabel UserNameLabel;
     private javax.swing.JPanel UserPanel;
@@ -397,8 +437,10 @@ public class jConnect4 extends javax.swing.JPanel {
     private javax.swing.JButton b7;
     private javax.swing.JButton bBack;
     private javax.swing.JPanel chatPanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jMessage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel labbel;
     // End of variables declaration//GEN-END:variables
 }
