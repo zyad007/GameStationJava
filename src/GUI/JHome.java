@@ -5,6 +5,7 @@
 package GUI;
 
 import Entities.User;
+import GUI.Games.RewardPanel;
 import GUI.Games.jConnect4;
 import GUI.Games.jSnakeLadder;
 import GUI.Games.jXO;
@@ -92,7 +93,7 @@ public class JHome extends javax.swing.JFrame {
         bXO = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         bConnect4 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        bIsWednesday = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         bLogout = new javax.swing.JButton();
@@ -195,7 +196,13 @@ public class JHome extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("??");
+        bIsWednesday.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bIsWednesday.setText("Is-Wednesday !!!");
+        bIsWednesday.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bIsWednesdayMouseClicked(evt);
+            }
+        });
 
         jButton7.setText("??");
 
@@ -213,7 +220,7 @@ public class JHome extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(bConnect4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bXO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(bIsWednesday, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -238,7 +245,7 @@ public class JHome extends javax.swing.JFrame {
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bIsWednesday, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -340,6 +347,14 @@ public class JHome extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }//GEN-LAST:event_bConnect4MouseClicked
 
+    private void bIsWednesdayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bIsWednesdayMouseClicked
+        // TODO add your handling code here:
+        _RewardPanel = new RewardPanel(this);
+        switchPanel(_RewardPanel);
+        this.setSize(720, 620);
+        this.setLocationRelativeTo(null);
+    }//GEN-LAST:event_bIsWednesdayMouseClicked
+
     
     /**
      * @param args the command line arguments
@@ -381,17 +396,18 @@ public class JHome extends javax.swing.JFrame {
     private jSnakeLadder _jSnakeLadder;
     private jConnect4 _jConnect4;
     private jXO _jXO;
+    private RewardPanel _RewardPanel;
     public User logedInUser ;
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel _Dashboard;
     private javax.swing.JButton bConnect4;
+    private javax.swing.JButton bIsWednesday;
     private javax.swing.JButton bLogout;
     private javax.swing.JButton bSnakeLadder;
     private javax.swing.JButton bXO;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JPanel jDefault;
     private javax.swing.JLabel jLabel1;
