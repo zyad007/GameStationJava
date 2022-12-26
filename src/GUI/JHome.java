@@ -172,6 +172,7 @@ public class JHome extends javax.swing.JFrame {
 
         bSnakeLadder.setBackground(new java.awt.Color(204, 0, 0));
         bSnakeLadder.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
+        bSnakeLadder.setForeground(new java.awt.Color(255, 255, 255));
         bSnakeLadder.setText("SNAKE & LADDER");
         bSnakeLadder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -186,7 +187,8 @@ public class JHome extends javax.swing.JFrame {
 
         bXO.setBackground(new java.awt.Color(204, 0, 0));
         bXO.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
-        bXO.setText("X-O");
+        bXO.setForeground(new java.awt.Color(255, 255, 255));
+        bXO.setText("XO");
         bXO.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bXOMouseClicked(evt);
@@ -195,10 +197,12 @@ public class JHome extends javax.swing.JFrame {
 
         jButton4.setBackground(new java.awt.Color(204, 0, 0));
         jButton4.setFont(new java.awt.Font("Algerian", 0, 12)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("??");
 
         bConnect4.setBackground(new java.awt.Color(204, 0, 0));
         bConnect4.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
+        bConnect4.setForeground(new java.awt.Color(255, 255, 255));
         bConnect4.setText("CONNECT4");
         bConnect4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -208,6 +212,7 @@ public class JHome extends javax.swing.JFrame {
 
         bIsWednesday.setBackground(new java.awt.Color(204, 0, 0));
         bIsWednesday.setFont(new java.awt.Font("Algerian", 1, 14)); // NOI18N
+        bIsWednesday.setForeground(new java.awt.Color(255, 255, 255));
         bIsWednesday.setText("Is-Wednesday !!!");
         bIsWednesday.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -217,6 +222,7 @@ public class JHome extends javax.swing.JFrame {
 
         jButton7.setBackground(new java.awt.Color(204, 0, 0));
         jButton7.setFont(new java.awt.Font("Algerian", 0, 12)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("??");
 
         jLabel1.setFont(new java.awt.Font("TrixiePro-Heavy", 3, 24)); // NOI18N
