@@ -54,6 +54,10 @@ public class JStartUp extends javax.swing.JFrame {
 
         jDefault.setLayout(new java.awt.CardLayout());
 
+        jLogin.setBackground(new java.awt.Color(51, 51, 51));
+
+        bLogin.setBackground(new java.awt.Color(255, 0, 0));
+        bLogin.setForeground(new java.awt.Color(255, 255, 255));
         bLogin.setText("Login");
         bLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -66,6 +70,8 @@ public class JStartUp extends javax.swing.JFrame {
             }
         });
 
+        bSignUp.setBackground(new java.awt.Color(255, 0, 0));
+        bSignUp.setForeground(new java.awt.Color(255, 255, 255));
         bSignUp.setText("Sign Up");
         bSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -78,11 +84,16 @@ public class JStartUp extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Perpetua Titling MT", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("USERNAME");
 
+        jLabel2.setFont(new java.awt.Font("Perpetua Titling MT", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("PASSWORD");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Rockwell Condensed", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Log In");
 
         javax.swing.GroupLayout jLoginLayout = new javax.swing.GroupLayout(jLogin);
@@ -90,11 +101,8 @@ public class JStartUp extends javax.swing.JFrame {
         jLoginLayout.setHorizontalGroup(
             jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLoginLayout.createSequentialGroup()
-                .addContainerGap(69, Short.MAX_VALUE)
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addGroup(jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoginLayout.createSequentialGroup()
-                        .addComponent(bLogin)
-                        .addGap(126, 126, 126))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoginLayout.createSequentialGroup()
                         .addComponent(bSignUp)
                         .addContainerGap())
@@ -103,12 +111,19 @@ public class JStartUp extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tUsername)
-                                .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                            .addComponent(tUsername))
                         .addGap(66, 66, 66))))
+            .addGroup(jLoginLayout.createSequentialGroup()
+                .addGroup(jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLoginLayout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jLabel3))
+                    .addGroup(jLoginLayout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(bLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jLoginLayout.setVerticalGroup(
             jLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
