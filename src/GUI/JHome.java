@@ -10,6 +10,7 @@ import GUI.Games.jConnect4;
 import GUI.Games.jSnakeLadder;
 import GUI.Games.jXO;
 import GUI.StartUp.JStartUp;
+import game.main.Main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -196,9 +197,14 @@ public class JHome extends javax.swing.JFrame {
         });
 
         jButton4.setBackground(new java.awt.Color(204, 0, 0));
-        jButton4.setFont(new java.awt.Font("Algerian", 0, 12)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("??");
+        jButton4.setText("SpaceX");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         bConnect4.setBackground(new java.awt.Color(204, 0, 0));
         bConnect4.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
@@ -226,7 +232,7 @@ public class JHome extends javax.swing.JFrame {
         jButton7.setText("??");
 
         jLabel1.setFont(new java.awt.Font("TrixiePro-Heavy", 3, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(153, 51, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Games");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -375,6 +381,12 @@ public class JHome extends javax.swing.JFrame {
         this.setSize(720, 620);
         this.setLocationRelativeTo(null);
     }//GEN-LAST:event_bIsWednesdayMouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        Main main = new Main();
+        main.setVisible(true);
+    }//GEN-LAST:event_jButton4MouseClicked
 
     
     /**
