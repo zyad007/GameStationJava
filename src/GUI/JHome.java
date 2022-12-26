@@ -103,6 +103,8 @@ public class JHome extends javax.swing.JFrame {
 
         jDefault.setLayout(new java.awt.CardLayout());
 
+        _Dashboard.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -114,6 +116,7 @@ public class JHome extends javax.swing.JFrame {
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lUsername.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
@@ -163,10 +166,13 @@ public class JHome extends javax.swing.JFrame {
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
+        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.setForeground(new java.awt.Color(0, 204, 204));
 
-        bSnakeLadder.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        bSnakeLadder.setText("SNAKE LADDER");
+        bSnakeLadder.setBackground(new java.awt.Color(204, 0, 0));
+        bSnakeLadder.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
+        bSnakeLadder.setText("SNAKE & LADDER");
         bSnakeLadder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bSnakeLadderMouseClicked(evt);
@@ -178,7 +184,8 @@ public class JHome extends javax.swing.JFrame {
             }
         });
 
-        bXO.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bXO.setBackground(new java.awt.Color(204, 0, 0));
+        bXO.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         bXO.setText("X-O");
         bXO.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -186,9 +193,12 @@ public class JHome extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(204, 0, 0));
+        jButton4.setFont(new java.awt.Font("Algerian", 0, 12)); // NOI18N
         jButton4.setText("??");
 
-        bConnect4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bConnect4.setBackground(new java.awt.Color(204, 0, 0));
+        bConnect4.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         bConnect4.setText("CONNECT4");
         bConnect4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -196,7 +206,8 @@ public class JHome extends javax.swing.JFrame {
             }
         });
 
-        bIsWednesday.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bIsWednesday.setBackground(new java.awt.Color(204, 0, 0));
+        bIsWednesday.setFont(new java.awt.Font("Algerian", 1, 14)); // NOI18N
         bIsWednesday.setText("Is-Wednesday !!!");
         bIsWednesday.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -204,9 +215,12 @@ public class JHome extends javax.swing.JFrame {
             }
         });
 
+        jButton7.setBackground(new java.awt.Color(204, 0, 0));
+        jButton7.setFont(new java.awt.Font("Algerian", 0, 12)); // NOI18N
         jButton7.setText("??");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("TrixiePro-Heavy", 3, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 51, 0));
         jLabel1.setText("Games");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -229,7 +243,7 @@ public class JHome extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(155, 155, 155))))
+                        .addGap(163, 163, 163))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,6 +271,7 @@ public class JHome extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setBackground(new java.awt.Color(51, 255, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/msg1272744420-5702.jpg"))); // NOI18N
 
