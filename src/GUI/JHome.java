@@ -16,8 +16,6 @@ import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -233,9 +231,14 @@ public class JHome extends javax.swing.JFrame {
         });
 
         jButton7.setBackground(new java.awt.Color(204, 0, 0));
-        jButton7.setFont(new java.awt.Font("Algerian", 0, 12)); // NOI18N
+        jButton7.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("??");
+        jButton7.setText("Hockey");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("TrixiePro-Heavy", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -395,6 +398,10 @@ public class JHome extends javax.swing.JFrame {
         Main main = new Main();
         main.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+ 
+    }//GEN-LAST:event_jButton7MouseClicked
 
     
     /**
