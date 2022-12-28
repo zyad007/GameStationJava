@@ -5,6 +5,7 @@
 package GUI;
 
 import Entities.User;
+import External.airHockey.GamePanelClass;
 import GUI.Games.RewardPanel;
 import GUI.Games.jConnect4;
 import GUI.Games.jSnakeLadder;
@@ -18,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -400,7 +402,20 @@ public class JHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
- 
+ JFrame frame = new JFrame("Game");
+
+        frame.setSize(500, 500);
+      
+        frame.getContentPane().setBackground(Color.black);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+
+        GamePanelClass gameclass = new GamePanelClass(frame);
+        //welcome wel =new welcome(frame);
+        frame.add(gameclass);
+
+        frame.setVisible(true);
     }//GEN-LAST:event_jButton7MouseClicked
 
     
